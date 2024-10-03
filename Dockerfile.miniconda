@@ -1,0 +1,28 @@
+FROM ubuntu:20.04
+
+# Set up environment variables
+ENV PATH=/srv/miniconda3/bin:$PATH
+
+# Install dependencies and tools
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends wget bzip2 && \
+    apt-get autoremove -y && apt-get clean -y
+
+# Install Miniconda
+RUN wget --no-check-certificate -v https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh || \
+    (echo "wget failed, trying curl" && curl -L https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh) && \
+    /bin/bash /tmp/miniconda.sh -b -p /srv/miniconda3 && \
+    rm /tmp/miniconda.sh && \
+    echo ". /srv/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+
+# Configure Conda channels
+RUN conda config --add channels conda-forge && \
+    conda config --add channels terradue
+
+# Clean up
+RUN apt-get autoremove -y && apt-get clean -y
+
+# Set locale
+ENV LANG en_US.utf8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.utf8
