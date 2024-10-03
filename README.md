@@ -13,10 +13,10 @@ If you haven't yet, build the miniconda docker.
 ```bash
 docker build -t my_miniconda:latest -f Dockerfile.miniconda . 
 ```
-Then build the application package docker file.
+Then build the application package docker file by mounting a volume i.e. "/home/ubuntu/volume"
 ```bash
 docker build -t oilspill001:1.0.0 -f Dockerfile1 .
-docker run -v /home/ubuntu/volume:/data_volume -it oilspill001:1.0.0
+docker run -v /home/ubuntu/volume:/oil_spill_directory -it oilspill001:1.0.0
 ```
 ### Example Commands
 Once inside the docker you can display the help message and then start searching for relevant data.
