@@ -1,0 +1,11 @@
+name: oilspill001
+channels:
+  - conda-forge
+  - terradue
+dependencies:
+  - python=3.8
+  - click
+  - python-dotenv
+  - shapely
+  - click2cwl
+  - pip
