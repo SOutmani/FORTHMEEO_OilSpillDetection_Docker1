@@ -1,0 +1,8 @@
+bbox: 24.07,35.70,24.69,36.26
+use_case_directory:
+  class: Directory
+  path: /path/to/oilspill_dir
+start_date: 2023-06-27 
+time_interval: 2
+#verbose: false  # Optional 
+debug: true  # Optional 

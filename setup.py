@@ -40,9 +40,9 @@ setuptools.setup(
         ]
     },
     project_urls={
-        "Bug Tracker": "https://github.com/SOutmani/ILIAD_OilSpills/issues",
-        "Documentation": "https://github.com/SOutmani/ILIAD_OilSpills",
-        "Source Code": "https://github.com/SOutmani/ILIAD_OilSpills",
+        "Bug Tracker": "https://github.com/SOutmani/FORTHMEEO_OilSpillDetection_Docker1/issues",
+        "Documentation": "https://github.com/SOutmani/FORTHMEEO_OilSpillDetection_Docker1/ILIAD_OilSpills",
+        "Source Code": "https://github.com/SOutmani/FORTHMEEO_OilSpillDetection_Docker1/ILIAD_OilSpills",
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",

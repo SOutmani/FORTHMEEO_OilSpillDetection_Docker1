@@ -26,7 +26,7 @@ from .module_asf import asf_search
 @click.option("--bbox", "--aoi", type=str, required=False, help="Bounding Box", metavar="min_lon, min_lat, max_lon, max_lat")
 @click.option("--start-date", "--start", type=str, required=False, help="Start date for data search", metavar="yyyy-mm-dd")
 @click.option("--time-interval", "--days", type=int, required=False, help="Time interval (n of days) for data search", metavar="n_days")
-@click.option("--end-date", "--end", type=int, required=False, help="End date for data search", metavar="yyyy-mm-dd")
+@click.option("--end-date", "--end", type=str, required=False, help="End date for data search", metavar="yyyy-mm-dd")
 @click.option("--verbose",              is_flag=True, default=False, help="Verbose mode")
 @click.option("--debug",                is_flag=True, default=False, help="Debug mode")
 @click.pass_context
@@ -58,14 +58,15 @@ def main(ctx, use_case_directory, verbose, debug, bbox=None, start_date=None, ti
     HISTORIC SEARCH: IF START DATE IS GIVEN, SPECIFIC IMAGES ARE DOWNLOADED (CERULEAN API CAN BE USED TO RETURN BOUNDING BOXES CONTAINING DETECTIONS THAT CAN BE USED LATER (PROBABLY NOT).
     '''
     #If specific dates are given - historic search.
-    if start_date:        
+    if start_date:   
+        start_date = datetime.strptime(start_date, '%Y-%m-%d')
+        
         if not time_interval and not end_date:
             raise click.UsageError("Either --time-interval or --end-date must be provided after --start-date.")
             sys.exit()
         if end_date:
             logger.info('Starting historic search.')
             # Convert string dates to datetime objects
-            start_date = datetime.strptime(start_date, '%Y-%m-%d')
             end_date = datetime.strptime(end_date, '%Y-%m-%d')
             # Compute the time interval in days
             time_interval = (end_date - start_date).days

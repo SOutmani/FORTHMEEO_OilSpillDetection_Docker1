@@ -7,7 +7,7 @@ from shapely.geometry import Polygon
 from datetime import datetime, timedelta
 from .module_log import logger
 
-def asf_search(aoi, use_case_directory, event_date, time_interval=None):	
+def asf_search(aoi, use_case_directory, event_date, time_interval):	
 	xmin, ymin, xmax, ymax = [float(coord) for coord in aoi.split(',')]
 	vertices = [(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax), (xmin, ymin)]
 	polygon = Polygon(vertices)
@@ -24,10 +24,9 @@ def asf_search(aoi, use_case_directory, event_date, time_interval=None):
 
 	if time_interval:
 		days = time_interval
-	else:
-		days = 1
+	#end_date = (datetime.strptime(event_date, "%Y-%m-%d") + timedelta(days)).strftime("%Y-%m-%d")
+	end_date = (event_date + timedelta(days)).strftime("%Y-%m-%d")
 
-	end_date = (datetime.strptime(event_date, "%Y-%m-%d") + timedelta(days)).strftime("%Y-%m-%d")
 	logger.debug(f"Searching images between: {event_date} - {end_date} in the area of interest")
 	logger.info("Starting Data Search")		
 	products = asf.search(platform=[asf.PLATFORM.SENTINEL1],
